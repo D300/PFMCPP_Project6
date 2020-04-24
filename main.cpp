@@ -86,9 +86,8 @@ struct Comparator                                //4
 struct U
 {
     float nameOne { 0.f }, nameTwo { 0.f };
-    float* memberFunction(float* updatedValue);      //12
     
-    float staticFunctionReplicate(float* updatedValue )        //10
+    float staticFunctionReplicate(float* updatedValue )        //12
     {
         if (updatedValue != nullptr)
         {
@@ -97,7 +96,7 @@ struct U
             
             std::cout << "U's nameOneRepl updated value: " << this->nameOne << std::endl;
             
-            while(std::abs(this->nameTwo - this->nameOne) > 0.001f )
+            while(std::abs(this->nameTwo - this->nameOne) > 0.001f)
             {
                 /*
                  write something that makes the distance between that->nameTwo and that->nameOne get smaller
@@ -119,21 +118,21 @@ struct StructNameTwo
     static float staticFunctionA(U* that, float* updatedValue )        //10
     {
         
-        if (that != nullptr)
+        if (that != nullptr || updatedValue != nullptr)
         {
             std::cout << "U's nameOne value: " << that->nameOne << std::endl;
             that->nameOne = *updatedValue;
             std::cout << "U's nameOne updated value: " << that->nameOne << std::endl;
-            while(std::abs(that->nameTwo - that->nameOne) > 0.001f )
+            while( std::abs(that->nameTwo - that->nameOne) > 0.001f )
             {
             /*
             write something that makes the distance between that->nameTwo and that->nameOne get smaller
              */
             that->nameTwo -= 0.001f;
             }
-        std::cout << "U's nameTwo updated value: " << that->nameTwo << std::endl;
+            std::cout << "U's nameTwo updated value: " << that->nameTwo << std::endl;
         
-        return that->nameTwo * that->nameOne;
+            return that->nameTwo * that->nameOne;
         }
                   
         return 0.f;
@@ -157,16 +156,5 @@ int main()
     std::cout << "[static func] nameThree's multiplied values: " << StructNameTwo::staticFunctionA(&nameThree, &updatedValue ) << std::endl;                  //11
     
     U nameFour;
-    // std::cout << "[member func] nameFour's multiplied values: " << nameFour.memberFunction( &updatedValue ) << std::endl;
-    
-    std::cout << "static function replicate in U: " << nameFour.staticFunctionReplicate(&updatedValue) << std::endl;
+    std::cout << "[member func] nameFour's multiplied values: " << nameFour.staticFunctionReplicate( &updatedValue ) << std::endl;
 }
-        
-        
-        
-        
-        
-        
-        
-        
-
