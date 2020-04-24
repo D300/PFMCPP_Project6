@@ -117,7 +117,7 @@ struct StructNameTwo
 {
     static float staticFunctionA(U* that, float* updatedValue )        //10
     {
-        
+        //What happens if `that` is not a `nullptr` but `updatedValue` **is** a `nullptr`? 
         if (that != nullptr || updatedValue != nullptr)
         {
             std::cout << "U's nameOne value: " << that->nameOne << std::endl;
@@ -157,4 +157,7 @@ int main()
     
     U nameFour;
     std::cout << "[member func] nameFour's multiplied values: " << nameFour.staticFunctionReplicate( &updatedValue ) << std::endl;
+
+    StructNameTwo::staticFunctionA(nullptr, &updatedValue );
+    StructNameTwo::staticFunctionA(&nameThree, nullptr );
 }
