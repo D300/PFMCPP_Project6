@@ -117,25 +117,34 @@ struct StructNameTwo
 {
     static float staticFunctionA(U* that, float* updatedValue )        //10
     {
-        //What happens if `that` is not a `nullptr` but `updatedValue` **is** a `nullptr`? 
-        if (that != nullptr || updatedValue != nullptr)
+        if (that == nullptr)
         {
-            std::cout << "U's nameOne value: " << that->nameOne << std::endl;
-            that->nameOne = *updatedValue;
-            std::cout << "U's nameOne updated value: " << that->nameOne << std::endl;
-            while( std::abs(that->nameTwo - that->nameOne) > 0.001f )
-            {
-            /*
-            write something that makes the distance between that->nameTwo and that->nameOne get smaller
-             */
-            that->nameTwo -= 0.001f;
-            }
-            std::cout << "U's nameTwo updated value: " << that->nameTwo << std::endl;
-        
-            return that->nameTwo * that->nameOne;
+            std::cout << "that is nullptr" << std::endl;
+            return 0.f;
         }
-                  
-        return 0.f;
+
+        if (updatedValue == nullptr)
+        {
+            std::cout << "updatedValue is nullptr" << std::endl;
+            return 0.f;
+        }
+ 
+
+        std::cout << "U's nameOne value: " << that->nameOne << std::endl;
+        that->nameOne = *updatedValue;
+        
+        std::cout << "U's nameOne updated value: " << that->nameOne << std::endl;
+        while( std::abs(that->nameTwo - that->nameOne) > 0.001f )
+        {
+            /*
+            write something that makes the distance between that->nameTwo and        that->nameOne get smaller
+            */
+        
+            that->nameTwo -= 0.001f;
+        }
+        std::cout << "U's nameTwo updated value: " << that->nameTwo << std::endl;
+        
+        return that->nameTwo * that->nameOne;
     }
 };
 
@@ -160,4 +169,5 @@ int main()
 
     StructNameTwo::staticFunctionA(nullptr, &updatedValue );
     StructNameTwo::staticFunctionA(&nameThree, nullptr );
+
 }
