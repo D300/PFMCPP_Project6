@@ -96,13 +96,16 @@ struct U
             
             std::cout << "U's nameOneRepl updated value: " << this->nameOne << std::endl;
             
-            while(std::abs(this->nameTwo - this->nameOne) > 0.001f)
+            // abs(0 - 5) > 1
+            while(std::abs(this->nameTwo - this->nameOne) > 1.f)
             {
                 /*
                  write something that makes the distance between that->nameTwo and that->nameOne get smaller
                  */
-                this->nameTwo -= 0.001f;
-                std::cout << "shrinking distance\n";
+                auto tempOne = std::abs(this->nameTwo - this->nameOne);
+                std::cout << "shrinking distance: " << tempOne << std::endl;
+
+                this->nameTwo += 0.1f;  
             }
             std::cout << "U's nameTwoRepl updated value: " << this->nameTwo << std::endl;
             
@@ -135,14 +138,18 @@ struct StructNameTwo
         that->nameOne = *updatedValue;
         
         std::cout << "U's nameOne updated value: " << that->nameOne << std::endl;
+
+
         while( std::abs(that->nameTwo - that->nameOne) > 0.001f )
         {
             /*
             write something that makes the distance between that->nameTwo and        that->nameOne get smaller
             */
+            auto tempTwo = std::abs(that->nameTwo - that->nameOne);
         
-            that->nameTwo -= 0.001f;
-            std::cout << "shrinking distance\n";
+            that->nameTwo += 0.1f;
+
+            std::cout << "shrinking distance\n" << tempTwo << std::endl;
         }
         std::cout << "U's nameTwo updated value: " << that->nameTwo << std::endl;
         
@@ -172,4 +179,5 @@ int main()
     StructNameTwo::staticFunctionA(nullptr, &updatedValue );
     StructNameTwo::staticFunctionA(&nameThree, nullptr );
 
+    std::cout << "this is the end" << std::endl;
 }
