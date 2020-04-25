@@ -102,6 +102,7 @@ struct U
                  write something that makes the distance between that->nameTwo and that->nameOne get smaller
                  */
                 this->nameTwo -= 0.001f;
+                std::cout << "shrinking distance\n";
             }
             std::cout << "U's nameTwoRepl updated value: " << this->nameTwo << std::endl;
             
@@ -141,6 +142,7 @@ struct StructNameTwo
             */
         
             that->nameTwo -= 0.001f;
+            std::cout << "shrinking distance\n";
         }
         std::cout << "U's nameTwo updated value: " << that->nameTwo << std::endl;
         
