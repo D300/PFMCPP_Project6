@@ -50,7 +50,7 @@ struct U
 {
     float nameOne { 0.f }, nameTwo { 0.f };
     
-    float staticFunctionReplicate(float& updatedValue )        //12
+    float staticFunctionReplicate(const float& updatedValue )        //12
     {
         // if (updatedValue != nullptr)
         // {
@@ -82,7 +82,7 @@ struct U
 
 struct StructNameTwo
 {
-    static float staticFunctionA(U& that, float& updatedValue )        //10
+    static float staticFunctionA(U& that, const float& updatedValue )        //10
     {
         std::cout << "U's nameOne value: " << that.nameOne << std::endl;
         that.nameOne = updatedValue;
@@ -121,7 +121,7 @@ int main()
         std::cout << "\nthe smaller one is << " << smaller->name << std::endl; //9
     
     U nameThree;
-    float updatedValue = 5.f;
+    const float updatedValue = 5.f;
     std::cout << "[static func] nameThree's multiplied values: " << StructNameTwo::staticFunctionA(nameThree, updatedValue ) << std::endl;                  //11
     
     U nameFour;
