@@ -35,13 +35,13 @@ struct T
 
 struct Comparator                                //4
 {
-    T* compare(T* a, T* b) //5
+    T* compare(T& a, T& b) //5
     {
-        if (a != nullptr && b != nullptr)
-        {
-            if( a->value < b->value ) return a;
-            if( a->value > b->value ) return b;
-        }
+        
+        if( a.value < b.value ) return &a;
+
+        if( a.value > b.value ) return &b;
+        
         return nullptr;
     }
 };
@@ -52,31 +52,28 @@ struct U
     
     float staticFunctionReplicate(const float& updatedValue )        //12
     {
-        // if (updatedValue != nullptr)
-        // {
-            std::cout << "U's nameOneRepl value: " << this->nameOne << std::endl;
-            this->nameOne = updatedValue;
-            
-            std::cout << "U's nameOneRepl updated value: " << this->nameOne << std::endl;
-            
-            // abs(0 - 5) > 1
-            while(std::abs(this->nameTwo - this->nameOne) > 1.f)
-            {
-                /*
-                 write something that makes the distance between that->nameTwo and that->nameOne get smaller
-                 */
-                auto tempOne = std::abs(this->nameTwo - this->nameOne);
-                std::cout << "shrinking distance: " << tempOne << std::endl;
-
-                this->nameTwo += 0.1f;  
-            }
-            std::cout << "U's nameTwoRepl updated value: " << this->nameTwo << std::endl;
-            
-            return this->nameTwo * this->nameOne;
-        // }
         
-        // std::cout << "updated val is nullptr!" << std::endl;
-        // return 0;
+        std::cout << "U's nameOneRepl value: " << this->nameOne << std::endl;
+        
+        this->nameOne = updatedValue;
+            
+        std::cout << "U's nameOneRepl updated value: " << this->nameOne << std::endl;
+            
+        // abs(0 - 5) > 1
+        while(std::abs(this->nameTwo - this->nameOne) > 1.f)
+        {
+            /*
+            write something that makes the distance between that->nameTwo and that->nameOne get smaller
+            */
+            auto tempOne = std::abs(this->nameTwo - this->nameOne);
+            std::cout << "shrinking distance: " << tempOne << std::endl;
+
+            this->nameTwo += 0.1f;  
+        }
+        std::cout << "U's nameTwoRepl updated value: " << this->nameTwo << std::endl;
+            
+        return this->nameTwo * this->nameOne;
+        
     }
 };
 
@@ -115,7 +112,7 @@ int main()
     T dolphin(10, "Flipper" );                                             //6
     
     Comparator f;                                            //7
-    auto* smaller = f.compare(&rabbit, &dolphin);                              //8
+    auto* smaller = f.compare(rabbit, dolphin);                              //8
     
     if (smaller != nullptr)
         std::cout << "\nthe smaller one is << " << smaller->name << std::endl; //9
@@ -128,9 +125,5 @@ int main()
     std::cout << "[member func] nameFour's multiplied values: " << nameFour.staticFunctionReplicate( updatedValue ) << std::endl;
 
         
-
-    // StructNameTwo::staticFunctionA(nullptr, &updatedValue );
-    // StructNameTwo::staticFunctionA(&nameThree, nullptr );
-
     std::cout << "this is the end" << std::endl;
 }
